@@ -1,16 +1,25 @@
 import React, { useState } from "react";
 import 'tailwindcss/tailwind.css';
-import bcrypt from 'bcryptjs';
+
 export const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
     const handleLogin = async (e) => {
         e.preventDefault();
-        const hashedPassword = await bcrypt.hash(password, 10); 
-        const isMatch = await bcrypt.compare(password, hashedPassword);
-        if (isMatch) {
-            console.log("Login successful");
+        
+        const response = await fetch("http://localhost:8884/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ email, password })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            console.log("Login successful", data.user);
         } else {
             console.log("Invalid credentials");
         }
@@ -50,7 +59,6 @@ const App = () => {
     return (
         <div className="min-h-screen bg-gray-100 flex items-center justify-center">
             <div className="space-y-10">
-                
                 <Login />
             </div>
         </div>

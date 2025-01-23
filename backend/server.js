@@ -25,6 +25,7 @@ const storage = multer.diskStorage({
     }
 });
 const upload = multer({ storage: storage });
+
 app.post("/upload", upload.single("myFile"), (req, res) => {
     try {
         console.log(req.file);
@@ -55,10 +56,11 @@ app.post("/create", async (req, res) => {
         res.send("Error occurred while creating user.");
     }
 });
+
 app.post("/login", async (req, res) => {
-    const { name, password } = req.body;
+    const { email, password } = req.body;
   
-    const user = await usemodel.findOne({ name: name });
+    const user = await usemodel.findOne({ email }); 
     if (!user) {
       return res.status(400).json({ message: "User not found" });
     }
@@ -70,7 +72,7 @@ app.post("/login", async (req, res) => {
     } else {
       res.status(400).json({ message: "Invalid credentials" });
     }
-  });
+});
 
 app.listen(PORT, async () => {
     console.log(`Server is running on ${PORT}`);
