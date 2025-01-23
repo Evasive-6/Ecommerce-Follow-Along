@@ -35,28 +35,39 @@ In the second milestone, we covered the following key aspects of the project:
 
 ## Milestone 3: Further
 
-In the second milestone, we covered the following key aspects of the project:
+In the third milestone, we covered the following key aspects of the project:
 
 1. used nodejs and express to set up backend
 2. established the connection with mongoDB to store the data of user efficiently    
 
 ## Milestone 4: Further
 
-In the second milestone, we covered the following key aspects of the project:
+In the fourth milestone, we covered the following key aspects of the project:
 
 1. created a usermodel with name, password and emailin in model folder
 2. also used multer to upload multimedia like images
 
 ## Milestone 5: Further
 
-In the second milestone, we covered the following key aspects of the project:
+In the fifth milestone, we covered the following key aspects of the project:
 
 1. Created frontend ui with signup page
 2. implemented form validation
 
 ## Milestone 6: Further
 
-In the second milestone, we covered the following key aspects of the project:
+In the sixth milestone, we covered the following key aspects of the project:
 
 1. Encrypted passowrd using bcryptjs library
 2. also stored user data in databse with password being encrypted
+
+## Milestone 7: Further
+In the seventh milestone, we covered the following key aspects of the project:
+
+1. created login endpoint accepting user credential like name and password
+2. used bcrypt to hash password and finally comparing the credentials with databse and logging user
+
+## Milestone 8: Further
+In the eight milestone, we covered the following key aspects of the project:
+
+1. Created a card component to display all products with image,name and price
