@@ -25,6 +25,16 @@ const Card = ({ data }) => {
     }
   };
 
+  const handleDelete = async (id) => {
+    try {
+      const response = await axios.delete(`/api/products/${id}`);
+      console.log(response.data.message);
+      // Optionally, refresh the product list or remove the deleted product from the UI
+    } catch (error) {
+      console.error('Error deleting product:', error);
+    }
+  };
+
   return (
     <div className='flex flex-wrap w-full justify-center items-center'>
       {data.map((i, idx) => (
@@ -58,6 +68,7 @@ const Card = ({ data }) => {
               <h3 className='font-bold uppercase text-2xl'>{i.name}</h3>
               <h3 className='font-bold text-blue-500'>{i.price}</h3>
               <button onClick={() => handleEdit(i)}>Edit</button>
+              <button onClick={() => handleDelete(i._id)}>Delete</button>
             </>
           )}
         </div>

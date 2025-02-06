@@ -31,11 +31,26 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage: storage });
+
 // Update product
 productRouter.put('/:id', async (req, res) => {
   try {
-    const updatedProduct = await Product.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    const updatedProduct = await productModel.findByIdAndUpdate(req.params.id, req.body, { new: true });
     res.json(updatedProduct);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
+
+// Delete product
+productRouter.delete('/:id', async (req, res) => {
+  try {
+    const deletedProduct = await productModel.findByIdAndDelete(req.params.id);
+    if (deletedProduct) {
+      res.json({ message: 'Product successfully deleted' });
+    } else {
+      res.status(404).json({ message: 'Product not found' });
+    }
   } catch (error) {
     res.status(500).send(error);
   }
