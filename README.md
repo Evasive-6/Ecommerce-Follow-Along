@@ -242,7 +242,9 @@ By completing Milestone 12, I will learn:
 - Frontend Data Handling: Dive into the process of getting fetched and rendered dynamically in a React application with filtered data.
 - Dynamic Rendering with Components: This guide describes how to build and use React components (i.e., the product card) for dynamically showing data according to user selection or filters.
 
+# E-Commerce Application - MERN Stack Project (Milestone 13) 
 
+added an endpoint that will receive new data and update the existing data inside MondoDB. In frontend added an edit button to the product card. When click on edit will send the data to form and make it auto fill and have option to edit those data and save
 
 
 

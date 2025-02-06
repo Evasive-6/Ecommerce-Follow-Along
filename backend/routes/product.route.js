@@ -31,6 +31,15 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage: storage });
+// Update product
+productRouter.put('/:id', async (req, res) => {
+  try {
+    const updatedProduct = await Product.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    res.json(updatedProduct);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
 
 productRouter.post('/create', upload.array('productImage', 12), async (req, res) => {
   try {
