@@ -32,10 +32,6 @@ In this milestone, I will accomplish the following tasks:
 
 At the end of this phase, I will be able to:.
 
-- Set up and configure a React application for building the user interface of your E-Commerce platform.
-- Set up a Node.js backend server with Express to capture API requests.
-- Incorporate Tailwind CSS for component styling and responsive design.
-- Implement a Login form which enables users to log in with sure form validation and contemporary look.
 
 # E-Commerce Application - MERN Stack Project (Milestone 3)
 
@@ -245,9 +241,6 @@ By completing Milestone 12, I will learn:
 - API Development with Query Parameters: How to define an API endpoint that takes parameters (e.g., email) and optionally filters and returns the data from the database.
 - Frontend Data Handling: Dive into the process of getting fetched and rendered dynamically in a React application with filtered data.
 - Dynamic Rendering with Components: This guide describes how to build and use React components (i.e., the product card) for dynamically showing data according to user selection or filters.
-
-
-
 
 
 
