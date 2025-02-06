@@ -32,10 +32,6 @@ In this milestone, I will accomplish the following tasks:
 
 At the end of this phase, I will be able to:.
 
-- Set up and configure a React application for building the user interface of your E-Commerce platform.
-- Set up a Node.js backend server with Express to capture API requests.
-- Incorporate Tailwind CSS for component styling and responsive design.
-- Implement a Login form which enables users to log in with sure form validation and contemporary look.
 
 # E-Commerce Application - MERN Stack Project (Milestone 3)
 
@@ -249,9 +245,6 @@ By completing Milestone 12, I will learn:
 # E-Commerce Application - MERN Stack Project (Milestone 13) 
 
 added an endpoint that will receive new data and update the existing data inside MondoDB. In frontend added an edit button to the product card. When click on edit will send the data to form and make it auto fill and have option to edit those data and save
-
-
-
 
 
 
