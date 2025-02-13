@@ -6,6 +6,7 @@ const bcrypt = require('bcrypt');
 const cors = require('cors');
 const jwt = require('jsonwebtoken');
 const { productRouter } = require('./routes/product.route.js');
+const cartRouter = require('./routes/cart'); // Import the cart route
 require('dotenv').config();
 
 const app = express();
@@ -110,6 +111,7 @@ app.post("/login", async (req, res) => {
 });
 
 app.use("/products", productRouter);
+app.use("/api/cart", cartRouter); // Use the cart routes
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
