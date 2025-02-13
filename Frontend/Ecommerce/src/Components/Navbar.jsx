@@ -7,6 +7,7 @@ const Navbar = () => {
         <button className='pr-11 text-2xl'><Link to={"/login"}>login</Link></button>
         <button className='text-2xl pr-11'><Link to={"/signup"}>Signup</Link></button>
         <button className='text-2xl'><Link to={"/addproduct"}>Add Product</Link></button>
+        <button className='text-2xl'><Link to={"/cart"}>Cart</Link></button>
       </nav>
     </div>
   )
