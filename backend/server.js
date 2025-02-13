@@ -6,7 +6,7 @@ const bcrypt = require('bcrypt');
 const cors = require('cors');
 const jwt = require('jsonwebtoken');
 const { productRouter } = require('./routes/product.route.js');
-const cartRouter = require('./routes/cart'); // Import the cart route
+const cartRouter = require('./routes/cart'); 
 require('dotenv').config();
 
 const app = express();
@@ -15,7 +15,7 @@ const PORT = 6969;
 app.use(cors());
 app.use(express.json());
 
-const mongoURL ="mongodb+srv://albinshiju285:pov2tBzbVG3yoNA8@cluster0.j5cuo.mongodb.net/Ecom_db";
+const mongoURL = "mongodb+srv://albinshiju285:pov2tBzbVG3yoNA8@cluster0.j5cuo.mongodb.net/Ecom_db";
 mongoose.connect(mongoURL);
 
 mongoose.connection.on('connected', () => {
