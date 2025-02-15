@@ -1,0 +1,19 @@
+meta {
+  name: PUT
+  type: http
+  seq: 5
+}
+
+put {
+  url: http://localhost:8080/users/67a489d7b669afbf64caa4cd
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "username":"Yashavi",
+    "email":"xyz@gmail.com",
+    "password":"98765432"
+  }
+}

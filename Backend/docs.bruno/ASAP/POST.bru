@@ -1,0 +1,19 @@
+meta {
+  name: POST
+  type: http
+  seq: 4
+}
+
+post {
+  url: http://localhost:8080/user
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "username":"jannat",
+    "email":"abc@gmail.com",
+    "password":"123456789"
+  }
+}
