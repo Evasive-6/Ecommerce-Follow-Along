@@ -14,7 +14,7 @@ const PORT = 8088;
 app.use(cors());
 app.use(express.json());
 
-const mongoURL = process.env.MONGODB_URI || "mongodb+srv://Jannat:jannat10175168@jannat.5n3xo.mongodb.net/EcomDB";
+const mongoURL = process.env.MONGODB_URI || "mongodb://albinshiju285:pov2tBzbVG3yoNA8@<hostname>/Ecom_db";
 mongoose.connect(mongoURL);
 
 mongoose.connection.on('connected', () => {
