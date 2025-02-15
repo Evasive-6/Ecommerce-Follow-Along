@@ -1,11 +1,12 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const { userModel } = require('./model/user.model.js');
+const { userModel } = require('./models/User');
 const multer = require('multer');
 const bcrypt = require('bcrypt');
 const cors = require('cors');
 const jwt = require('jsonwebtoken');
 const { productRouter } = require('./routes/product.route.js');
+const userRouter = require('./routes/user'); // Import the user route
 require('dotenv').config();
 
 const app = express();
@@ -14,7 +15,7 @@ const PORT = 8088;
 app.use(cors());
 app.use(express.json());
 
-const mongoURL = process.env.MONGODB_URI || "mongodb://albinshiju285:pov2tBzbVG3yoNA8@<hostname>/Ecom_db";
+const mongoURL = process.env.MONGODB_URI || "mongodb+srv://albinshiju285:pov2tBzbVG3yoNA8@cluster0.j5cuo.mongodb.net/Ecom_db";
 mongoose.connect(mongoURL);
 
 mongoose.connection.on('connected', () => {
@@ -110,6 +111,7 @@ app.post("/login", async (req, res) => {
 });
 
 app.use("/products", productRouter);
+app.use("/api/user", userRouter); // Use the user routes
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
