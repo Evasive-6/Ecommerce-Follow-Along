@@ -17,4 +17,24 @@ router.get('/profile/:userId', async (req, res) => {
   }
 });
 
+// Endpoint to add user address
+router.post('/profile/:userId/address', async (req, res) => {
+  const { userId } = req.params;
+  const { address } = req.body;
+
+  try {
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    user.address = address;
+    await user.save();
+
+    res.status(200).json({ address: user.address });
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to add address' });
+  }
+});
+
 module.exports = router;

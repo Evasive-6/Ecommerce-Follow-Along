@@ -1,13 +1,15 @@
-const mongoose=require('mongoose')
-const userSchema=mongoose.Schema({
-    name:{type:String,required:true},
-    email:{type:String,required:true,unique:true},
-    password:{type:String,required:true,unique:true},
-    age:{type:String,required:true, min:8, max:15},
+const mongoose = require('mongoose');
 
+const userSchema = mongoose.Schema({
+    name: { type: String, required: true },
+    email: { type: String, required: true, unique: true },
+    password: { type: String, required: true },
+    age: { type: Number, required: true, min: 8, max: 15 },
+    address: { type: String }  
+});
 
-})
-const userModel=mongoose.model("usercollection",userSchema)
-module.exports={
-    userModel
-}
+const UserModel = mongoose.model('usercollection', userSchema);
+
+module.exports = {
+    UserModel
+};

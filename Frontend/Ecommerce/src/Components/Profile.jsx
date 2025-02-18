@@ -4,11 +4,12 @@ import axios from 'axios';
 const Profile = () => {
   const [user, setUser] = useState({});
   const [address, setAddress] = useState('');
+  const [newAddress, setNewAddress] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('/api/user/profile/USER_ID'); // Replace USER_ID with actual user ID
+        const response = await axios.get('/profile/:userId'); 
         setUser(response.data);
       } catch (error) {
         console.error('Error fetching user data', error);
@@ -18,8 +19,14 @@ const Profile = () => {
     fetchData();
   }, []);
 
-  const handleAddAddress = () => {
-    // Implement add address functionality
+  const handleAddAddress = async () => {
+    try {
+      const response = await axios.post('/profile/:userId/address', { address: newAddress });
+      setAddress(response.data.address);
+      setNewAddress(''); 
+    } catch (error) {
+      console.error('Error adding address', error);
+    }
   };
 
   return (
@@ -41,6 +48,13 @@ const Profile = () => {
         ) : (
           <p className="text-gray-500">No address found</p>
         )}
+        <input
+          type="text"
+          value={newAddress}
+          onChange={(e) => setNewAddress(e.target.value)}
+          placeholder="Enter new address"
+          className="border rounded px-4 py-2 mt-2"
+        />
         <button
           className="bg-blue-500 text-white rounded px-4 py-2 mt-2"
           onClick={handleAddAddress}
