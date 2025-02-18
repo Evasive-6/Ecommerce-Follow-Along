@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../model/user.model');
-
+const authentication = require('../middleware/authentication'); 
 // Endpoint to get user data
-router.get('/profile/:userId', async (req, res) => {
+router.get('/profile/:userId', authentication, async (req, res) => {
   const { userId } = req.params;
 
   try {
@@ -18,7 +18,7 @@ router.get('/profile/:userId', async (req, res) => {
 });
 
 // Endpoint to add user address
-router.post('/profile/:userId/address', async (req, res) => {
+router.post('/profile/:userId/address', authentication, async (req, res) => {
   const { userId } = req.params;
   const { address } = req.body;
 
