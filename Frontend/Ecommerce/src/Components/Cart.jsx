@@ -1,26 +1,58 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Cart = ({ data }) => {
   const [products, setProducts] = useState(data);
+  const navigate = useNavigate();
 
-  const increaseQuantity = (productId) => {
+  const increaseQuantity = async (productId) => {
     const updatedProducts = products.map((product) =>
       product._id === productId
         ? { ...product, quantity: product.quantity + 1 }
         : product
     );
     setProducts(updatedProducts);
-    // Make API call to update quantity on the backend
+
+    try {
+      const response = await fetch(`/api/products/${productId}/increase-quantity`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      if (!response.ok) {
+        throw new Error('Failed to update quantity');
+      }
+    } catch (error) {
+      console.error('Error updating quantity:', error);
+    }
   };
 
-  const decreaseQuantity = (productId) => {
+  const decreaseQuantity = async (productId) => {
     const updatedProducts = products.map((product) =>
       product._id === productId && product.quantity > 1
         ? { ...product, quantity: product.quantity - 1 }
         : product
     );
     setProducts(updatedProducts);
-    // Make API call to update quantity on the backend
+
+    try {
+      const response = await fetch(`/api/products/${productId}/decrease-quantity`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      if (!response.ok) {
+        throw new Error('Failed to update quantity');
+      }
+    } catch (error) {
+      console.error('Error updating quantity:', error);
+    }
+  };
+
+  const handlePlaceOrder = () => {
+    navigate('/sellectAdress');
   };
 
   return (
@@ -37,6 +69,7 @@ const Cart = ({ data }) => {
           </div>
         </div>
       ))}
+      <button className='bg-green-500 text-white rounded-xl p-4 mt-10' onClick={handlePlaceOrder}>Place Order</button>
     </div>
   );
 };

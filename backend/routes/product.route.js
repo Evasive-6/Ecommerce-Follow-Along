@@ -3,6 +3,9 @@ const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 const { productModel } = require('../model/product.model');
+const { orderModel } = require('../model/order.model'); // Assuming you have an Order model
+const authentication = require('../middleware/authentication'); // Import the authentication middleware
+
 let productRouter = express.Router();
 
 // Ensure upload directory exists
@@ -19,6 +22,7 @@ productRouter.get("/", async (req, res) => {
     res.status(500).send({ "Error-message": error.message });
   }
 });
+
 productRouter.get("/:id", async (req, res) => {
   try {
     const id=req.params.id;
@@ -38,6 +42,7 @@ productRouter.delete("/:id", async (req, res) => {
     res.status(500).send({ "Error-message": error.message });
   }
 });
+
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, uploadDir);
@@ -68,6 +73,26 @@ productRouter.post('/create', upload.array('productImage', 12), async (req, res)
   } catch (error) {
     console.error(error);
     res.status(500).send({ error: error.message });
+  }
+});
+
+// Endpoint to place an order
+productRouter.post('/place-order', authentication, async (req, res) => {
+  const { userId, addressId, products } = req.body;
+
+  try {
+    const newOrder = new orderModel({
+      userId,
+      addressId,
+      products,
+      totalAmount: products.reduce((total, product) => total + product.price * product.quantity, 0),
+      status: 'Pending',
+    });
+
+    await newOrder.save();
+    res.status(201).json({ message: 'Order placed successfully', orderId: newOrder._id });
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to place order' });
   }
 });
 

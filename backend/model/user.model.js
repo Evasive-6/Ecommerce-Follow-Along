@@ -5,7 +5,7 @@ const userSchema = mongoose.Schema({
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     age: { type: Number, required: true, min: 8, max: 15 },
-    address: { type: String }  
+    address: { type: [String],default:[]}  
 });
 
 const UserModel = mongoose.model('usercollection', userSchema);

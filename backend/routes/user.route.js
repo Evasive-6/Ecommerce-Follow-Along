@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../model/user.model');
-const authentication = require('../middleware/authentication'); 
+const authentication = require('../middleware/authentication'); // Import the authentication middleware
+
 // Endpoint to get user data
 router.get('/profile/:userId', authentication, async (req, res) => {
   const { userId } = req.params;
@@ -28,10 +29,10 @@ router.post('/profile/:userId/address', authentication, async (req, res) => {
       return res.status(404).json({ message: 'User not found' });
     }
 
-    user.address = address;
+    user.addresses.push(address); 
     await user.save();
 
-    res.status(200).json({ address: user.address });
+    res.status(200).json({ addresses: user.addresses });
   } catch (error) {
     res.status(500).json({ error: 'Failed to add address' });
   }
