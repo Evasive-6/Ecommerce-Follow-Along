@@ -3,8 +3,8 @@ const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 const { productModel } = require('../model/product.model');
-const { orderModel } = require('../model/order.model'); // Assuming you have an Order model
-const authentication = require('../middleware/authentication'); // Import the authentication middleware
+const { orderModel } = require('../model/order.model'); 
+const authentication = require('../middleware/authentication'); 
 
 let productRouter = express.Router();
 
