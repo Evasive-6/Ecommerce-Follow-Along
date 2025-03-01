@@ -11,6 +11,7 @@ const Navbar = () => {
         <NavLink className='text-2xl pr-11' activeClassName='font-bold' to="/">Home</NavLink>
         <NavLink className='text-2xl pr-11' activeClassName='font-bold' to="/myproducts">My Products</NavLink>
         <NavLink className='text-2xl pr-11' activeClassName='font-bold' to="/cart">Cart</NavLink>
+        <NavLink className='text-2xl pr-11' activeClassName='font-bold' to="/my-orders">My Orders</NavLink> 
         <NavLink className='text-2xl' activeClassName='font-bold' to="/profile">Profile</NavLink>
       </nav>
     </div>
