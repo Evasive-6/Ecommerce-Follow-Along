@@ -1,9 +1,9 @@
-
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
 const MyOrders = () => {
   const [orders, setOrders] = useState([]);
+  const [paymentMethod, setPaymentMethod] = useState('cod'); // Default payment method is COD
   const userEmail = 'user@example.com'; // Replace with actual user email
 
   useEffect(() => {
@@ -36,6 +36,10 @@ const MyOrders = () => {
     }
   };
 
+  const handlePaymentChange = (event) => {
+    setPaymentMethod(event.target.value);
+  };
+
   return (
     <div>
       <h2>My Orders</h2>
@@ -57,6 +61,37 @@ const MyOrders = () => {
             </li>
           ))}
         </ul>
+      )}
+
+      <h3>Payment Options</h3>
+      <form>
+        <label>
+          <input
+            type="radio"
+            name="payment-method"
+            value="cod"
+            checked={paymentMethod === 'cod'}
+            onChange={handlePaymentChange}
+          />
+          Cash on Delivery (COD)
+        </label><br />
+        <label>
+          <input
+            type="radio"
+            name="payment-method"
+            value="online"
+            checked={paymentMethod === 'online'}
+            onChange={handlePaymentChange}
+          />
+          Online Payment
+        </label>
+      </form>
+
+      {paymentMethod === 'online' && (
+        <div id="paypal-buttons">
+          {/* PayPal button placeholders */}
+          <p>PayPal Buttons Placeholder</p>
+        </div>
       )}
     </div>
   );
