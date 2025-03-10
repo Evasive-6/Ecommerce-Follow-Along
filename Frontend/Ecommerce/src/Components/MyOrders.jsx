@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { PayPalScriptProvider, PayPalButtons } from '@paypal/react-paypal-js';
 
 const MyOrders = () => {
   const [orders, setOrders] = useState([]);
@@ -38,6 +39,11 @@ const MyOrders = () => {
 
   const handlePaymentChange = (event) => {
     setPaymentMethod(event.target.value);
+  };
+
+  const handleApprove = (orderID) => {
+    console.log('Payment Approved. Order ID:', orderID);
+    alert(`Payment successful! Order ID: ${orderID}`);
   };
 
   return (
@@ -88,10 +94,37 @@ const MyOrders = () => {
       </form>
 
       {paymentMethod === 'online' && (
-        <div id="paypal-buttons">
-          {/* PayPal button placeholders */}
-          <p>PayPal Buttons Placeholder</p>
-        </div>
+        <PayPalScriptProvider
+          options={{
+            "client-id": "Your-PayPal-Client-ID", // Replace with your PayPal client ID
+            currency: "USD", // Adjust as per your needs
+          }}
+        >
+          <PayPalButtons
+            style={{ layout: 'vertical' }}
+            createOrder={(data, actions) => {
+              // Example order creation
+              return actions.order.create({
+                purchase_units: [
+                  {
+                    amount: {
+                      value: '20.00', // Replace with dynamic order total
+                    },
+                  },
+                ],
+              });
+            }}
+            onApprove={(data, actions) => {
+              return actions.order.capture().then((details) => {
+                handleApprove(data.orderID);
+              });
+            }}
+            onError={(err) => {
+              console.error('Payment Error:', err);
+              alert('Payment failed. Please try again.');
+            }}
+          />
+        </PayPalScriptProvider>
       )}
     </div>
   );

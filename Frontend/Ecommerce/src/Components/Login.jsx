@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { setEmail } from './store/actions'; 
+import { setEmail } from './store/userActions'; 
 
 const Login = () => {
   const [form, setForm] = useState({
