@@ -5,6 +5,7 @@ const multer = require('multer');
 const bcrypt = require('bcrypt');
 const cors = require('cors');
 const jwt = require('jsonwebtoken');
+const cookieParser = require('cookie-parser'); // Import cookie-parser
 const { productRouter } = require('./routes/product.route.js');
 const userRouter = require('./routes/user'); // Import the user route
 require('dotenv').config();
@@ -14,6 +15,7 @@ const PORT = 8088;
 
 app.use(cors());
 app.use(express.json());
+app.use(cookieParser()); // Use cookie-parser middleware
 
 const mongoURL = process.env.MONGODB_URI || "mongodb+srv://albinshiju285:pov2tBzbVG3yoNA8@cluster0.j5cuo.mongodb.net/Ecom_db";
 mongoose.connect(mongoURL);
@@ -95,7 +97,11 @@ app.post("/login", async (req, res) => {
       let hashPassword = user[0].password;
       bcrypt.compare(password, hashPassword, function (err, result) {
         if (result) {
-          let token = jwt.sign({ "userID": user[0]._id }, process.env.SECRET_KEY);
+          let token = jwt.sign({ "userID": user[0]._id, "email": user[0].email }, process.env.SECRET_KEY, { expiresIn: '1h' });
+
+          // Set token in an HTTP-only cookie
+          res.cookie('authToken', token, { httpOnly: true, maxAge: 3600000 }); // 1 hour expiration
+
           res.send({ "msg": "Login successfully", "token": token });
         } else {
           res.send({ "message": "Invalid credentials" });
